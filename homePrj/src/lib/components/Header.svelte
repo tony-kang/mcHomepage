@@ -1,13 +1,14 @@
 <script>
 	let isMenuOpen = $state(false);
-	let isStayMenuOpen = $state(false);
+	let isSubMenuOpen = $state(false);
+	let openSubMenu = $state('');
 
 	const toggleMenu = () => {
 		isMenuOpen = !isMenuOpen;
 	};
 
 	const toggleStayMenu = () => {
-		isStayMenuOpen = !isStayMenuOpen;
+		isSubMenuOpen = !isSubMenuOpen;
 	};
 </script>
 
@@ -17,7 +18,7 @@
 			<!-- Logo -->
 			<div class="logo">
 				<a href="/">
-					<img src="/logo.svg" alt="Elyes" />
+					<img class="mt-2" src="/logo/mc_mindcoding_pattern_1_light.png" alt="MindCoding" />
 				</a>
 			</div>
 
@@ -25,50 +26,76 @@
 			<nav class="desktop-nav">
 				<ul class="nav-list">
 					<li><a href="/about">About</a></li>
-					<li><a href="/services">Services</a></li>
-					<li class="dropdown" onmouseenter={() => isStayMenuOpen = true} onmouseleave={() => isStayMenuOpen = false}>
-						<a href="/stay">Stay</a>
-						{#if isStayMenuOpen}
-							<div class="dropdown-menu">
+					<li class="dropdown"
+						onmouseenter={() => { isSubMenuOpen = true; openSubMenu = 'Services'}} 
+						onmouseleave={() => { isSubMenuOpen = false; openSubMenu = ''}}>
+						<a href="/services">Services</a>
+						{#if openSubMenu === 'Services'}
+							<div class="dropdown-menu" style="min-width: 300px;">
 								<div class="dropdown-section">
-									<h4>공동주택</h4>
+									<h4>학생상담</h4>
 									<ul>
-										<li><a href="/stay/apt/sindongtan">신동탄 롯데캐슬</a></li>
-										<li><a href="/stay/apt/dongtan2">동탄2 롯데캐슬</a></li>
-										<li><a href="/stay/apt/munrae">문래 롯데캐슬</a></li>
-										<li><a href="/stay/apt/doksan">독산역 롯데캐슬</a></li>
-										<li><a href="/stay/apt/hangang">한강 롯데캐슬 22단지</a></li>
-										<li><a href="/stay/apt/hadan">하단 롯데캐슬</a></li>
-										<li><a href="/stay/apt/sasong">사송 롯데캐슬</a></li>
-										<li><a href="/stay/apt/sujigu">수지구청역 롯데캐슬하이브 엘</a></li>
-										<li><a href="/stay/apt/dobong">도봉 롯데캐슬골든파크</a></li>
+										<li><a href="/stay/apt/sindongtan">PTI CODE 검사</a></li>
+										<li><a href="/stay/apt/dongtan2">상담 & 코칭</a></li>
+										<li><a href="/stay/apt/munrae">컨설팅</a></li>
+										<li><a href="/stay/apt/munrae">교육 & 특강</a></li>
+										<li><a href="/stay/apt/munrae">캠프 & 워크숍</a></li>
 									</ul>
 								</div>
 								<div class="dropdown-section">
-									<h4>오피스텔, 청년주택</h4>
+									<h4>자격과정</h4>
 									<ul>
-										<li><a href="/stay/officetel/munrae">문래 롯데캐슬 오피스텔</a></li>
-										<li><a href="/stay/officetel/wonhyo">용산 원효 루미니</a></li>
-										<li><a href="/stay/officetel/namyoung">용산 남영역 롯데캐슬헤리티지</a></li>
-										<li><a href="/stay/officetel/seocho">서초 청년주택</a></li>
-										<li><a href="/stay/officetel/gasan">어바니엘 가산</a></li>
-										<li><a href="/stay/officetel/hangang">어바니엘 한강</a></li>
-										<li><a href="/stay/officetel/yeomchang">어바니엘 염창역</a></li>
-										<li><a href="/stay/officetel/chungjeong">어바니엘 충정로</a></li>
-										<li><a href="/stay/officetel/cheonho">어바니엘 천호</a></li>
-									</ul>
-								</div>
-								<div class="dropdown-section">
-									<h4>오피스, 리테일</h4>
-									<ul>
-										<li><a href="/stay/office/geumcheon">금천 롯데타워</a></li>
-										<li><a href="/stay/retail">롯데캐슬 단지내 상가</a></li>
+										<li><a href="/stay/office/geumcheon">Coach</a></li>
+										<li><a href="/stay/retail">Pro</a></li>
+										<li><a href="/stay/retail">Master</a></li>
 									</ul>
 								</div>
 							</div>
 						{/if}
 					</li>
-					<li><a href="/info">Info</a></li>
+					<li class="dropdown"
+						onmouseenter={() => { isSubMenuOpen = true; openSubMenu = 'Brands'}} 
+						onmouseleave={() => { isSubMenuOpen = false; openSubMenu = ''}}>
+						<a href="/stay">Brands</a>
+						{#if openSubMenu === 'Brands'}
+							<div class="dropdown-menu" style="min-width: 300px;">
+								<div class="dropdown-section">
+									<h4>학습코칭/컨설팅</h4>
+									<ul>
+										<li><a href="/stay/apt/sindongtan">질풍가도 입시컨설팅</a></li>
+										<li><a href="/stay/apt/dongtan2">VIVA 학습코칭</a></li>
+										<li><a href="/stay/apt/munrae">VIVA B&M 학습케어</a></li>
+									</ul>
+								</div>
+								<div class="dropdown-section">
+									<h4>Certification</h4>
+									<ul>
+										<li><a href="/stay/office/geumcheon">Coach</a></li>
+										<li><a href="/stay/retail">Pro</a></li>
+										<li><a href="/stay/retail">Master</a></li>
+									</ul>
+								</div>
+							</div>
+						{/if}
+					</li>
+					<li class="dropdown" 
+						onmouseenter={() => { isSubMenuOpen = true; openSubMenu = 'Info'}} 
+						onmouseleave={() => { isSubMenuOpen = false; openSubMenu = ''}}>
+						<a href="/info">Info</a>
+						{#if openSubMenu === 'Info'}
+							<div class="dropdown-menu" style="min-width: 200px;">
+								<div class="dropdown-section">
+									<ul>
+										<li><a href="/stay/apt/sindongtan">공지사항</a></li>
+										<li><a href="/stay/apt/dongtan2">자주묻는 질문</a></li>
+										<li><a href="/stay/apt/munrae">문의사항</a></li>
+										<li><a href="/stay/apt/munrae">이용약관</a></li>
+										<li><a href="/stay/apt/munrae">개인정보처리방침</a></li>
+									</ul>
+								</div>
+							</div>
+						{/if}
+					</li>
 				</ul>
 			</nav>
 
@@ -95,7 +122,7 @@
 					<li><a href="/services">Services</a></li>
 					<li class="mobile-dropdown">
 						<button onclick={toggleStayMenu}>Stay</button>
-						{#if isStayMenuOpen}
+						{#if isSubMenuOpen}
 							<ul class="mobile-dropdown-menu">
 								<li><a href="/stay/apt">공동주택</a></li>
 								<li><a href="/stay/officetel">오피스텔/청년주택</a></li>
@@ -137,7 +164,7 @@
 	}
 
 	.logo img {
-		height: 40px;
+		height: 60px;
 	}
 
 	.desktop-nav {
@@ -181,7 +208,6 @@
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 		border-radius: 8px;
 		padding: 20px;
-		min-width: 600px;
 		display: flex;
 		gap: 30px;
 		z-index: 1001;
