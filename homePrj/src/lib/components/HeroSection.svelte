@@ -3,22 +3,22 @@
 	
 	const slides = [
 		{
-			title: "Excellent Stay",
-			subtitle: "당신의 라이프스타일을 바꿀",
-			description: "새로운 주거서비스 플랫폼을 만나보세요",
-			image: "https://via.placeholder.com/1200x600/007bff/ffffff?text=Excellent+Stay"
+			title: "교육을 넘어 경영",
+			subtitle: "마음으로",
+			description: "마인드코딩",
+			image: "https://via.placeholder.com/1200x600/007bff/ffffff?text=교육을+넘어+경영"
 		},
 		{
-			title: "Lifetime Value",
-			subtitle: "엘리스와 함께 할수록 커져가는",
-			description: "삶의 가치를 느껴보세요",
-			image: "https://via.placeholder.com/1200x600/28a745/ffffff?text=Lifetime+Value"
+			title: "심리재능 기반",
+			subtitle: "PTI:CODE로",
+			description: "개인의 성장을 설계합니다",
+			image: "https://via.placeholder.com/1200x600/28a745/ffffff?text=심리재능+기반"
 		},
 		{
-			title: "Beyond Expectation",
-			subtitle: "지금까지 경험하지 못한",
-			description: "부동산 종합서비스를 누려보세요",
-			image: "https://via.placeholder.com/1200x600/dc3545/ffffff?text=Beyond+Expectation"
+			title: "네 가지 영역",
+			subtitle: "심리·학습·관계·비즈니스",
+			description: "삶의 전 영역을 경영하듯 관리합니다",
+			image: "https://via.placeholder.com/1200x600/dc3545/ffffff?text=네+가지+영역"
 		}
 	];
 

@@ -8,8 +8,8 @@
 </script>
 
 <svelte:head>
-	<title>엘리스 - 당신의 라이프스타일을 바꿀 새로운 주거서비스 플랫폼</title>
-	<meta name="description" content="엘리스와 함께하는 특별한 주거 경험. 롯데캐슬 브랜드 주거상품으로 안정적이고 편리한 생활을 시작하세요." />
+	<title>마인드코딩 - 교육을 넘어 경영, 마음으로</title>
+	<meta name="description" content="마인드코딩은 개인의 심리재능(PTI:CODE)을 기반으로 학습·진로·관계·비즈니스 등 삶의 전 영역을 경영하는 맞춤형 성장 플랫폼입니다." />
 </svelte:head>
 
 <Header />

@@ -18,7 +18,7 @@
 			<!-- Logo -->
 			<div class="logo">
 				<a href="/">
-					<img class="mt-2" src="/logo/mc_mindcoding_pattern_1_light.png" alt="MindCoding" />
+					<img class="mt-2" src="/logo/mc_mindcoding_pattern_1_light.png" alt="마인드코딩" />
 				</a>
 			</div>
 
