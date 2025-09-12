@@ -2,13 +2,18 @@
 	let isMenuOpen = $state(false);
 	let isSubMenuOpen = $state(false);
 	let openSubMenu = $state('');
+	let mobileOpenSubMenu = $state('');
 
 	const toggleMenu = () => {
 		isMenuOpen = !isMenuOpen;
+		// 모바일 메뉴가 열릴 때 서브메뉴 초기화
+		if (!isMenuOpen) {
+			mobileOpenSubMenu = '';
+		}
 	};
 
-	const toggleStayMenu = () => {
-		isSubMenuOpen = !isSubMenuOpen;
+	const toggleMobileSubMenu = (menuName) => {
+		mobileOpenSubMenu = mobileOpenSubMenu === menuName ? '' : menuName;
 	};
 </script>
 
@@ -25,54 +30,47 @@
 			<!-- Desktop Navigation -->
 			<nav class="desktop-nav">
 				<ul class="nav-list">
-					<li><a href="/about">About</a></li>
+					<li><a href="/about">스토리</a></li>
 					<li class="dropdown"
 						onmouseenter={() => { isSubMenuOpen = true; openSubMenu = 'Services'}} 
 						onmouseleave={() => { isSubMenuOpen = false; openSubMenu = ''}}>
-						<a href="/services">Services</a>
+						<a href="/services">서비스</a>
 						{#if openSubMenu === 'Services'}
-							<div class="dropdown-menu" style="min-width: 300px;">
+							<div class="dropdown-menu" style="min-width: 500px;">
 								<div class="dropdown-section">
-									<h4>학생상담</h4>
+									<h4>핵심 서비스</h4>
 									<ul>
-										<li><a href="/stay/apt/sindongtan">PTI CODE 검사</a></li>
-										<li><a href="/stay/apt/dongtan2">상담 & 코칭</a></li>
-										<li><a href="/stay/apt/munrae">컨설팅</a></li>
-										<li><a href="/stay/apt/munrae">교육 & 특강</a></li>
-										<li><a href="/stay/apt/munrae">캠프 & 워크숍</a></li>
+										<li><a href="/services/pti-code">PTI:CODE</a></li>
+										<li><a href="/services/psychological">심리재능</a></li>
+										<li><a href="/services/learning-career">학습진로</a></li>
+										<li><a href="/services/relationship">관계소통</a></li>
+										<li><a href="/services/business">비즈니스</a></li>
 									</ul>
 								</div>
-								<div class="dropdown-section">
-									<h4>자격과정</h4>
-									<ul>
-										<li><a href="/stay/office/geumcheon">Coach</a></li>
-										<li><a href="/stay/retail">Pro</a></li>
-										<li><a href="/stay/retail">Master</a></li>
-									</ul>
-								</div>
+						<div class="dropdown-section">
+							<h4>특별 프로그램</h4>
+							<ul>
+								<li><a href="/services/learning-camp">학습 캠프</a></li>
+								<li><a href="/services/career-camp">진로 캠프</a></li>
+								<li><a href="/services/workshop">워크숍</a></li>
+							</ul>
+						</div>
 							</div>
 						{/if}
 					</li>
+					<li><a href="/services/certification">자격과정</a></li>
 					<li class="dropdown"
-						onmouseenter={() => { isSubMenuOpen = true; openSubMenu = 'Brands'}} 
+						onmouseenter={() => { isSubMenuOpen = true; openSubMenu = 'Support'}} 
 						onmouseleave={() => { isSubMenuOpen = false; openSubMenu = ''}}>
-						<a href="/stay">Brands</a>
-						{#if openSubMenu === 'Brands'}
-							<div class="dropdown-menu" style="min-width: 300px;">
+						<a href="/contact">고객지원</a>
+						{#if openSubMenu === 'Support'}
+							<div class="dropdown-menu" style="min-width: 200px;">
 								<div class="dropdown-section">
-									<h4>학습코칭/컨설팅</h4>
 									<ul>
-										<li><a href="/stay/apt/sindongtan">질풍가도 입시컨설팅</a></li>
-										<li><a href="/stay/apt/dongtan2">VIVA 학습코칭</a></li>
-										<li><a href="/stay/apt/munrae">VIVA B&M 학습케어</a></li>
-									</ul>
-								</div>
-								<div class="dropdown-section">
-									<h4>Certification</h4>
-									<ul>
-										<li><a href="/stay/office/geumcheon">Coach</a></li>
-										<li><a href="/stay/retail">Pro</a></li>
-										<li><a href="/stay/retail">Master</a></li>
+										<li><a href="/contact">상담 신청</a></li>
+										<li><a href="/faq">자주묻는 질문</a></li>
+										<li><a href="/privacy">개인정보처리방침</a></li>
+										<li><a href="/terms">이용약관</a></li>
 									</ul>
 								</div>
 							</div>
@@ -81,16 +79,14 @@
 					<li class="dropdown" 
 						onmouseenter={() => { isSubMenuOpen = true; openSubMenu = 'Info'}} 
 						onmouseleave={() => { isSubMenuOpen = false; openSubMenu = ''}}>
-						<a href="/info">Info</a>
+						<a href="/notice">커뮤니티</a>
 						{#if openSubMenu === 'Info'}
 							<div class="dropdown-menu" style="min-width: 200px;">
 								<div class="dropdown-section">
 									<ul>
-										<li><a href="/stay/apt/sindongtan">공지사항</a></li>
-										<li><a href="/stay/apt/dongtan2">자주묻는 질문</a></li>
-										<li><a href="/stay/apt/munrae">문의사항</a></li>
-										<li><a href="/stay/apt/munrae">이용약관</a></li>
-										<li><a href="/stay/apt/munrae">개인정보처리방침</a></li>
+										<li><a href="/notice">공지사항</a></li>
+										<li><a href="/news">뉴스</a></li>
+										<li><a href="/events">이벤트</a></li>
 									</ul>
 								</div>
 							</div>
@@ -118,21 +114,54 @@
 		{#if isMenuOpen}
 			<nav class="mobile-nav">
 				<ul class="mobile-nav-list">
-					<li><a href="/about">About</a></li>
-					<li><a href="/services">Services</a></li>
+					<li><a href="/about">스토리</a></li>
 					<li class="mobile-dropdown">
-						<button onclick={toggleStayMenu}>Stay</button>
-						{#if isSubMenuOpen}
+						<button onclick={() => toggleMobileSubMenu('Services')}>서비스</button>
+						{#if mobileOpenSubMenu === 'Services'}
 							<ul class="mobile-dropdown-menu">
-								<li><a href="/stay/apt">공동주택</a></li>
-								<li><a href="/stay/officetel">오피스텔/청년주택</a></li>
-								<li><a href="/stay/office">오피스/리테일</a></li>
+								<li class="mobile-dropdown-section">
+									<h4>핵심 서비스</h4>
+									<ul>
+										<li><a href="/services/pti-code">PTI:CODE</a></li>
+										<li><a href="/services/psychological">심리재능</a></li>
+										<li><a href="/services/learning-career">학습진로</a></li>
+										<li><a href="/services/relationship">관계소통</a></li>
+										<li><a href="/services/business">비즈니스</a></li>
+									</ul>
+								</li>
+								<li class="mobile-dropdown-section">
+									<h4>특별 프로그램</h4>
+									<ul>
+										<li><a href="/services/learning-camp">학습 캠프</a></li>
+										<li><a href="/services/career-camp">진로 캠프</a></li>
+										<li><a href="/services/workshop">워크숍</a></li>
+									</ul>
+								</li>
 							</ul>
 						{/if}
 					</li>
-					<li><a href="/info">Info</a></li>
-					<li><a href="/login">Login</a></li>
-					<li><a href="/join">Join</a></li>
+					<li><a href="/services/certification">자격과정</a></li>
+					<li class="mobile-dropdown">
+						<button onclick={() => toggleMobileSubMenu('Support')}>고객지원</button>
+						{#if mobileOpenSubMenu === 'Support'}
+							<ul class="mobile-dropdown-menu">
+								<li><a href="/contact">상담 신청</a></li>
+								<li><a href="/faq">자주묻는 질문</a></li>
+								<li><a href="/privacy">개인정보처리방침</a></li>
+								<li><a href="/terms">이용약관</a></li>
+							</ul>
+						{/if}
+					</li>
+					<li class="mobile-dropdown">
+						<button onclick={() => toggleMobileSubMenu('Info')}>커뮤니티</button>
+						{#if mobileOpenSubMenu === 'Info'}
+							<ul class="mobile-dropdown-menu">
+								<li><a href="/notice">공지사항</a></li>
+								<li><a href="/news">뉴스</a></li>
+								<li><a href="/events">이벤트</a></li>
+							</ul>
+						{/if}
+					</li>
 				</ul>
 			</nav>
 		{/if}
@@ -341,6 +370,34 @@
 	.mobile-dropdown-menu a {
 		font-size: 14px;
 		color: #666;
+	}
+
+	.mobile-dropdown-section {
+		margin-bottom: 20px;
+	}
+
+	.mobile-dropdown-section h4 {
+		font-size: 14px;
+		font-weight: 600;
+		color: #333;
+		margin: 0 0 10px 0;
+		padding: 0;
+	}
+
+	.mobile-dropdown-section ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.mobile-dropdown-section li {
+		margin-bottom: 5px;
+	}
+
+	.mobile-dropdown-section a {
+		font-size: 13px;
+		color: #666;
+		padding: 5px 0;
 	}
 
 	/* Responsive Design */
