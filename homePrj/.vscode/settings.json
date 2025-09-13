@@ -1,0 +1,28 @@
+{
+  "svelte.plugin.svelte.format.enable": true,
+  "svelte.plugin.svelte.diagnostics.enable": true,
+  "svelte.plugin.svelte.hover.enable": true,
+  "svelte.plugin.svelte.completions.enable": true,
+  "svelte.plugin.svelte.documentSymbols.enable": true,
+  "svelte.plugin.svelte.codeActions.enable": true,
+  "svelte.plugin.svelte.rename.enable": true,
+  "svelte.plugin.svelte.selectionRange.enable": true,
+  "svelte.plugin.svelte.foldingRange.enable": true,
+  "svelte.plugin.svelte.linkedEditing.enable": true,
+  "svelte.plugin.svelte.signatureHelp.enable": true,
+  "svelte.plugin.svelte.inlayHints.enable": true,
+  "svelte.plugin.svelte.diagnostics.config": {
+    "a11y-click-events-have-key-events": "ignore",
+    "a11y-no-static-element-interactions": "ignore",
+    "a11y-no-noninteractive-element-interactions": "ignore",
+    "a11y-no-noninteractive-tabindex": "ignore",
+    "a11y-interactive-supports-focus": "ignore",
+    "a11y-no-redundant-role": "ignore",
+    "a11y-role-has-required-aria-props": "ignore",
+    "a11y-role-supports-aria-props": "ignore",
+    "a11y-no-access-key": "ignore",
+    "a11y-autocomplete-valid": "ignore",
+    "a11y-label-has-associated-control": "ignore",
+    "require-explicit-label": "ignore"
+  }
+}

@@ -1,8 +1,14 @@
 <script>
+	import { onMount } from 'svelte';
+	import ___prj from '$prj/prjMain';
 	import favicon from '$lib/assets/favicon.svg';
 	import '../app.css';
 
 	let { children } = $props();
+
+	onMount(async () => {
+		await ___prj.init();
+	});
 </script>
 
 <svelte:head>

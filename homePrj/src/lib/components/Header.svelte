@@ -97,8 +97,8 @@
 
 			<!-- Auth Buttons -->
 			<div class="auth-buttons">
-				<a href="/login" class="btn-login">Login</a>
-				<a href="/join" class="btn-join">Join</a>
+				<a href="/s/signIn" class="btn-login">Login</a>
+				<a href="/s/signUp" class="btn-join">Join</a>
 				<a href="/sitemap" class="btn-sitemap">Site Map</a>
 			</div>
 
@@ -163,6 +163,13 @@
 						{/if}
 					</li>
 				</ul>
+				
+				<!-- Mobile Auth Buttons -->
+				<div class="mobile-auth-buttons">
+					<a href="/s/signIn" class="mobile-btn-login">Login</a>
+					<a href="/s/signUp" class="mobile-btn-join">Join</a>
+					<a href="/sitemap" class="mobile-btn-sitemap">Site Map</a>
+				</div>
 			</nav>
 		{/if}
 	</div>
@@ -398,6 +405,65 @@
 		font-size: 13px;
 		color: #666;
 		padding: 5px 0;
+	}
+
+	/* Mobile Auth Buttons */
+	.mobile-auth-buttons {
+		margin-top: 20px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		border-top: 1px solid #e5e5e5;
+		display: flex;
+		gap: 10px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.mobile-btn-login,
+	.mobile-btn-join,
+	.mobile-btn-sitemap {
+		padding: 8px 16px;
+		border-radius: 20px;
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		border: 1px solid;
+		text-align: center;
+		min-width: 80px;
+	}
+
+	.mobile-btn-login {
+		color: #667eea;
+		border-color: #667eea;
+		background: transparent;
+	}
+
+	.mobile-btn-login:hover {
+		background: #667eea;
+		color: white;
+	}
+
+	.mobile-btn-join {
+		color: white;
+		border-color: #667eea;
+		background: #667eea;
+	}
+
+	.mobile-btn-join:hover {
+		background: #5a67d8;
+		border-color: #5a67d8;
+	}
+
+	.mobile-btn-sitemap {
+		color: #666;
+		border-color: #ccc;
+		background: transparent;
+	}
+
+	.mobile-btn-sitemap:hover {
+		background: #f5f5f5;
+		border-color: #999;
 	}
 
 	/* Responsive Design */
