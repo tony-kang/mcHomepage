@@ -8,7 +8,7 @@
     import ___prj from '$prj/prjMain';
     import { g_brandLogo, g_logoSizes } from '$prj/prjStore';
 
-    import ScreenCenter from '$lib/C/layout/ScreenCenter.svelte';
+    import ScreenCenter from '$prj/C/layout/ScreenCenter.svelte';
 
     let pwResetToken = $state('');
     let errorExist = $state(false);

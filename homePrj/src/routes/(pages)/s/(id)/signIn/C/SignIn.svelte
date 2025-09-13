@@ -92,7 +92,7 @@
 						<label for="keepLoggedIn" class="checkbox-label">로그인 상태 유지</label>
 					</div>
 					<div class="forgot-password">
-						<a href="/find-password" class="forgot-link">비밀번호를 잊으셨나요?</a>
+						<a href="/s/pwSearch" class="forgot-link">비밀번호를 잊으셨나요?</a>
 					</div>
 				</div>
 
@@ -138,7 +138,7 @@
 		<!-- 회원가입 링크 -->
 		<div class="signup-section">
 			<p>아직 회원이 아니신가요?</p>
-			<a href="/signup" class="signup-button">회원가입</a>
+			<a href="/s/signup" class="signup-button">회원가입</a>
 		</div>
 	</div>
 </div>

@@ -3,7 +3,6 @@
     import ___prj from "$prj/prjMain";
     import ___log from "$prj/lib/i_log";
     import { _color } from "$prj/lib/i_etc";
-    import { g_brandLogo, g_logoSizes } from '$prj/prjStore';
     import { getContext } from 'svelte';
     
     const ___telepasi = getContext('___telepasi');
@@ -38,107 +37,378 @@
     }
 </script>
 
-<div class="flex items-center justify-center">
-    <div class="w-full max-w-md my-10">
-        <!-- 로고 -->
-        <div class="text-center mb-10">
-            <img src={$g_brandLogo} alt="Logo" class={'mx-auto ' + g_logoSizes.login}/>
-            <h2 class="mt-6 text-2xl font-bold text-theme">비밀번호 찾기</h2>
-        </div>
+<div class="pwsearch-page">
+	<div class="pwsearch-section">
+		<div class="container">
+			<div class="pwsearch-card">
+				<!-- 헤더 -->
+				<div class="pwsearch-header">
+					<a href="/" class="logo-link">
+						<img src="/logo/mc_mindcoding_pattern_1_light.png" alt="마인드코딩" class="logo" />
+					</a>
+					<h1 class="pwsearch-title">비밀번호 찾기</h1>
+					<p class="pwsearch-subtitle">가입한 이메일로 임시 비밀번호를 받아보세요</p>
+				</div>
 
-        <!-- 비밀번호 찾기 폼 -->
-        <div class="bg-theme p-8 rounded-lg shadow-theme">
-            <form onsubmit={handleSubmit} class="space-y-6">
-                <div>
-                    <label class="block font-medium text-theme" for="userId">아이디</label>
-                    <input
-                        id="userId"
-                        type="text"
-                        bind:value={userId}
-                        placeholder="아이디를 입력하세요"
-                        class="mt-1 block w-full px-3 py-2 border border-theme rounded-md shadow-sm 
-                            focus:outline-none focus:ring-primary focus:border-primary 
-                            bg-input text-input-text text-base placeholder:text-base"
-                        required
-                    />
-                </div>
+				<!-- 비밀번호 찾기 폼 -->
+				<div class="pwsearch-form-wrapper">
+					<form onsubmit={handleSubmit} class="pwsearch-form">
+						<div class="form-group">
+							<label for="userId">아이디 <span class="required">*</span></label>
+							<input
+								id="userId"
+								type="text"
+								bind:value={userId}
+								placeholder="아이디를 입력하세요"
+								required
+							/>
+						</div>
 
-                <div>
-                    <label class="block font-medium text-theme" for="email">이메일</label>
-                    <input
-                        id="email"
-                        type="email"
-                        bind:value={email}
-                        placeholder="가입시 등록한 이메일을 입력하세요"
-                        class="mt-1 block w-full px-3 py-2 border border-theme rounded-md shadow-sm 
-                            focus:outline-none focus:ring-primary focus:border-primary 
-                            bg-input text-input-text text-base placeholder:text-base"
-                        required
-                    />
-                </div>
+						<div class="form-group">
+							<label for="email">이메일 <span class="required">*</span></label>
+							<input
+								id="email"
+								type="email"
+								bind:value={email}
+								placeholder="가입시 등록한 이메일을 입력하세요"
+								required
+							/>
+						</div>
 
-                <button
-                    type="submit"
-                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm 
-                        text-base font-medium text-white bg-primary hover:bg-primary-hover 
-                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                >
-                    비밀번호 찾기
-                </button>
-            </form>
+						<button type="submit" class="pwsearch-button">
+							비밀번호 찾기
+						</button>
+					</form>
+				</div>
 
-            <div class="mt-6 flex justify-center space-x-4 text-sm">
-                <a href="/s/signIn" class="text-primary hover:text-primary-hover">로그인</a>
-                <span class="text-theme">|</span>
-                <a href="/s/idSearch" class="text-primary hover:text-primary-hover">아이디 찾기</a>
-            </div>
+				<!-- 안내 메시지 섹션 -->
+				<div class="notice-section">
+					<div class="notice-item">
+						<i class="fas fa-info-circle"></i>
+						<span>가입된 이메일로 임시 비밀번호가 발송됩니다.</span>
+					</div>
+					<div class="notice-item">
+						<i class="fas fa-exclamation-triangle"></i>
+						<span>로그인 후 반드시 비밀번호를 변경해 주세요.</span>
+					</div>
+				</div>
 
-            <div class="mt-6 text-sm text-theme">
-                <p class="text-left">※ 가입된 이메일로 임시 비밀번호가 발송됩니다.</p>
-                <p class="text-left">※ 로그인 후 반드시 비밀번호를 변경해 주세요.</p>
-            </div>
-        </div>
-    </div>
+				<!-- 링크 섹션 -->
+				<div class="link-section">
+					<p>다른 방법이 필요하신가요?</p>
+					<div class="link-buttons">
+						<a href="/s/signIn" class="link-button">로그인</a>
+						<a href="/s/idSearch" class="link-button">아이디 찾기</a>
+						<a href="/s/signUp" class="link-button">회원가입</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <style>
-    :global(.text-theme) {
-        color: var(--text-color);
-    }
+	.pwsearch-page {
+		min-height: 100vh;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+	}
 
-    :global(.bg-theme) {
-        background-color: var(--bg-color);
-    }
+	.pwsearch-section {
+		width: 100%;
+		max-width: 500px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
-    :global(.border-theme) {
-        border-color: var(--border-color);
-    }
+	.container {
+		width: 100%;
+	}
 
-    :global(.shadow-theme) {
-        box-shadow: 0 2px 10px var(--shadow-color);
-    }
+	.pwsearch-card {
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+		overflow: hidden;
+		border: 1px solid #e2e8f0;
+	}
 
-    :global(.bg-input) {
-        background-color: var(--input-bg);
-    }
+	.pwsearch-header {
+		text-align: center;
+		padding: 3rem 2rem 2rem;
+		background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+	}
 
-    :global(.text-input-text) {
-        color: var(--input-text);
-    }
+	.logo-link {
+		display: inline-block;
+	}
 
-    :global(.text-primary) {
-        color: var(--primary-color);
-    }
+	.logo {
+		height: 60px;
+		width: auto;
+	}
 
-    :global(.bg-primary) {
-        background-color: var(--primary-color);
-    }
+	.pwsearch-title {
+		font-size: 2rem;
+		font-weight: 700;
+		color: #2d3748;
+		margin: 1.5rem 0 0.5rem;
+	}
 
-    :global(.hover\:bg-primary-hover:hover) {
-        background-color: var(--primary-hover);
-    }
+	.pwsearch-subtitle {
+		font-size: 1rem;
+		color: #718096;
+		margin: 0;
+	}
 
-    :global(.hover\:text-primary-hover:hover) {
-        color: var(--primary-hover);
-    }
+	.pwsearch-form-wrapper {
+		padding: 2rem;
+	}
+
+	.pwsearch-form {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.form-group label {
+		font-weight: 600;
+		color: #4a5568;
+		font-size: 0.875rem;
+	}
+
+	.required {
+		color: #e53e3e;
+	}
+
+	.form-group input {
+		padding: 0.875rem 1rem;
+		border: 2px solid #e2e8f0;
+		border-radius: 10px;
+		font-size: 1rem;
+		transition: all 0.3s ease;
+		background: #f8f9fa;
+	}
+
+	.form-group input:focus {
+		outline: none;
+		border-color: #667eea;
+		background: white;
+		box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+	}
+
+	.pwsearch-button {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		border: none;
+		padding: 1rem 2rem;
+		border-radius: 10px;
+		font-size: 1.125rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		margin-top: 1rem;
+	}
+
+	.pwsearch-button:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+	}
+
+	.notice-section {
+		padding: 0 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.notice-item {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 1rem;
+		background: #f8f9ff;
+		border-radius: 10px;
+		border-left: 4px solid #667eea;
+	}
+
+	.notice-item i {
+		color: #667eea;
+		font-size: 1.125rem;
+		width: 20px;
+		text-align: center;
+	}
+
+	.notice-item span {
+		color: #4a5568;
+		font-size: 0.875rem;
+		line-height: 1.5;
+	}
+
+	.link-section {
+		text-align: center;
+		padding: 1.2rem;
+		background: #f8f9ff;
+		border-top: 1px solid #e2e8f0;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.link-section p {
+		color: #718096;
+		margin: 0;
+		font-size: 0.875rem;
+	}
+
+	.link-buttons {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.link-button {
+		display: inline-block;
+		background: white;
+		color: #667eea;
+		border: 2px solid #667eea;
+		padding: 0.5rem 1.5rem;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		font-size: 0.875rem;
+	}
+
+	.link-button:hover {
+		background: #667eea;
+		color: white;
+		transform: translateY(-1px);
+	}
+
+	/* 모바일 반응형 */
+	@media (max-width: 768px) {
+		.pwsearch-page {
+			padding: 0;
+			background: white;
+		}
+
+		.pwsearch-section {
+			width: 100%;
+			max-width: none;
+			min-height: 100vh;
+			align-items: flex-start;
+			padding-top: 80px;
+		}
+
+		.container {
+			width: 100%;
+			padding: 0 !important;
+			max-width: 100% !important;
+			margin: 0 !important;
+		}
+
+		.pwsearch-card {
+			border-radius: 0;
+			box-shadow: none;
+			border: none;
+			min-height: calc(100vh - 80px);
+			display: flex;
+			flex-direction: column;
+		}
+
+		.pwsearch-header {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 2rem 1.5rem 1.5rem;
+			border-radius: 16px 16px 0 0;
+		}
+
+		.pwsearch-header .pwsearch-title {
+			color: white;
+		}
+
+		.pwsearch-header .pwsearch-subtitle {
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+		.pwsearch-form-wrapper {
+			padding: 1.5rem;
+			background: white;
+			flex: 1;
+		}
+
+		.notice-section {
+			padding: 0 1.5rem;
+		}
+
+		.link-section {
+			padding: 1.2rem;
+			background: #f8f9ff;
+			border-radius: 0 0 16px 16px;
+		}
+
+		.link-buttons {
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
+		.link-button {
+			width: 100%;
+			text-align: center;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.pwsearch-header {
+			padding: 1.5rem 1rem 1rem;
+		}
+
+		.pwsearch-form-wrapper {
+			padding: 1rem;
+		}
+
+		.notice-section {
+			padding: 0 1rem;
+		}
+
+		.link-section {
+			padding: 1rem;
+		}
+
+		.pwsearch-title {
+			font-size: 1.5rem;
+		}
+	}
+
+	/* 글로벌 스타일 오버라이드 */
+	:global(.pwsearch-section .container) {
+		padding: 0 !important;
+		max-width: 100% !important;
+		margin: 0 !important;
+	}
+
+	:global(.container) {
+		padding: 0 !important;
+		max-width: 100% !important;
+		margin: 0 !important;
+	}
+
+	:global(html),
+	:global(body) {
+		overflow-x: hidden !important;
+		width: 100% !important;
+		max-width: 100% !important;
+	}
 </style>

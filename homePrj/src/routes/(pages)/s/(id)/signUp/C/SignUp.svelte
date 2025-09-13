@@ -11,7 +11,8 @@
     let modalState = $state({
         isOpen: false,
         title: '',
-        content: ''
+        content: '',
+        type: ''
     });
 
     // 약관 내용을 저장할 상태 변수
@@ -77,7 +78,6 @@
     }
 
     function validatePassword() {
-        // 더 많은 특수문자를 허용하는 정규식
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/;
         if (!passwordRegex.test(formData.user_pw)) {
             errors.user_pw = '비밀번호는 8자 이상이며, 영문, 숫자, 특수문자를 포함해야 합니다.';
@@ -134,11 +134,6 @@
         }
 
         if (!isValid) {
-            console.log('validateUserId()', validateUserId());
-            console.log('validatePassword()', validatePassword());
-            console.log('validatePasswordConfirm()', validatePasswordConfirm());
-            console.log('validateEmail()', validateEmail());
-            console.log('validatePhone()', validatePhone());
             alert('입력 정보를 확인해주세요.');
             return;
         }
@@ -189,319 +184,538 @@
     });
 </script>
 
-<div class="flex items-center justify-center">
-    <div class="w-full max-w-2xl my-10 px-4">
-        <!-- 로고 -->
-        <div class="text-center mb-10">
-            <img src={$g_brandLogo} alt="Logo" class={'mx-auto ' + g_logoSizes.login}/>
-            <h2 class="mt-6 text-2xl font-bold text-theme">회원가입</h2>
-        </div>
+<div class="signup-page">
+	<div class="signup-section">
+		<div class="container">
+			<div class="signup-card">
+				<!-- 헤더 -->
+				<div class="signup-header">
+					<a href="/" class="logo-link">
+						<img src="/logo/mc_mindcoding_pattern_1_light.png" alt="마인드코딩" class="logo" />
+					</a>
+					<h1 class="signup-title">회원가입</h1>
+					<p class="signup-subtitle">새로운 계정을 만들어보세요</p>
+				</div>
 
-        <!-- 회원가입 폼 -->
-        <div class="bg-theme p-8 rounded-lg shadow-theme">
-            <form onsubmit={handleSubmit} class="space-y-6">
-                <!-- 기본 정보 -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-medium text-theme border-b border-theme pb-2">기본 정보</h3>
-                    
-                    <div>
-                        <label class="block font-medium text-theme text-xs" for="user_id">
-                            아이디 (<span class="edit-item-required">★</span>)
-                        </label>
-                        <input
-                            id="user_id"
-                            type="text"
-                            bind:value={formData.user_id}
-                            onblur={validateUserId}
-                            placeholder="아이디 (4자 이상)"
-                            class="mt-1 block w-full px-3 py-2 border border-theme rounded-md shadow-sm 
-                                focus:outline-none focus:ring-primary focus:border-primary 
-                                bg-input text-input-text text-base placeholder:text-base"
-                            autocomplete="username"
-                            required
-                        />
-                        {#if errors.user_id}
-                            <p class="mt-1 text-sm text-red-500">{errors.user_id}</p>
-                        {/if}
-                    </div>
+				<!-- 회원가입 폼 -->
+				<div class="signup-form-wrapper">
+					<form onsubmit={handleSubmit} class="signup-form">
+						<!-- 기본 정보 섹션 -->
+						<div class="form-section">
+							<h3>기본 정보</h3>
+							
+							<div class="form-group">
+								<label for="user_id">아이디 <span class="required">*</span></label>
+								<input
+									id="user_id"
+									type="text"
+									bind:value={formData.user_id}
+									onblur={validateUserId}
+									placeholder="아이디 (4자 이상)"
+									required
+								/>
+								{#if errors.user_id}
+									<span class="error-message">{errors.user_id}</span>
+								{/if}
+							</div>
 
-                    <div>
-                        <label class="block font-medium text-theme text-xs" for="user_pw">
-                            비밀번호 (<span class="edit-item-required">★</span>)
-                        </label>
-                        <input
-                            id="user_pw"
-                            type="password"
-                            bind:value={formData.user_pw}
-                            onblur={validatePassword}
-                            placeholder="비밀번호 (영문, 숫자, 특수문자 포함 8자 이상)"
-                            class="mt-1 block w-full px-3 py-2 border border-theme rounded-md shadow-sm 
-                                focus:outline-none focus:ring-primary focus:border-primary 
-                                bg-input text-input-text text-base placeholder:text-base"
-                            autocomplete="new-password"
-                            required
-                        />
-                        {#if errors.user_pw}
-                            <p class="mt-1 text-sm text-red-500">{errors.user_pw}</p>
-                        {/if}
-                    </div>
+							<div class="form-group">
+								<label for="user_pw">비밀번호 <span class="required">*</span></label>
+								<input
+									id="user_pw"
+									type="password"
+									bind:value={formData.user_pw}
+									onblur={validatePassword}
+									placeholder="비밀번호 (영문, 숫자, 특수문자 포함 8자 이상)"
+									required
+								/>
+								{#if errors.user_pw}
+									<span class="error-message">{errors.user_pw}</span>
+								{/if}
+							</div>
 
-                    <div>
-                        <label class="block font-medium text-theme text-xs" for="user_pw_confirm">
-                            비밀번호 확인 (<span class="edit-item-required">★</span>)
-                        </label>
-                        <input
-                            id="user_pw_confirm"
-                            type="password"
-                            bind:value={formData.user_pw_confirm}
-                            onblur={validatePasswordConfirm}
-                            placeholder="비밀번호 확인"
-                            class="mt-1 block w-full px-3 py-2 border border-theme rounded-md shadow-sm 
-                                focus:outline-none focus:ring-primary focus:border-primary 
-                                bg-input text-input-text text-base placeholder:text-base"
-                            required
-                        />
-                        {#if errors.user_pw_confirm}
-                            <p class="mt-1 text-sm text-red-500">{errors.user_pw_confirm}</p>
-                        {/if}
-                    </div>
-                </div>
+							<div class="form-group">
+								<label for="user_pw_confirm">비밀번호 확인 <span class="required">*</span></label>
+								<input
+									id="user_pw_confirm"
+									type="password"
+									bind:value={formData.user_pw_confirm}
+									onblur={validatePasswordConfirm}
+									placeholder="비밀번호 확인"
+									required
+								/>
+								{#if errors.user_pw_confirm}
+									<span class="error-message">{errors.user_pw_confirm}</span>
+								{/if}
+							</div>
+						</div>
 
-                <!-- 개인 정보 -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-medium text-theme border-b border-theme pb-2">개인 정보</h3>
-                    
-                    <div class="flex gap-4">
-                        <div class="w-4/12">
-                            <label class="block font-medium text-theme text-xs" for="user_type">
-                                회원구분 (<span class="edit-item-required">★</span>)
-                            </label>
-                            <select
-                                id="user_type"
-                                bind:value={formData.user_type}
-                                class="mt-1 block w-full h-[42px] px-3 py-2 border border-theme rounded-md shadow-sm 
-                                    focus:outline-none focus:ring-primary focus:border-primary 
-                                    bg-input text-input-text text-base"
-                                required
-                            >
-                                {#each userTypes as type}
-                                    <option value={type.value}>{type.label}</option>
-                                {/each}
-                            </select>
-                        </div>
-                
-                        <div class="w-8/12">
-                            <label class="block font-medium text-theme text-xs" for="user_name">
-                                이름 (<span class="edit-item-required">★</span>)
-                            </label>
-                            <input
-                                id="user_name"
-                                type="text"
-                                bind:value={formData.user_name}
-                                placeholder="이름"
-                                class="mt-1 block w-full h-[42px] px-3 py-2 border border-theme rounded-md shadow-sm 
-                                    focus:outline-none focus:ring-primary focus:border-primary 
-                                    bg-input text-input-text text-base placeholder:text-base"
-                                required
-                            />
-                        </div>
-                    </div>
+						<!-- 개인 정보 섹션 -->
+						<div class="form-section">
+							<h3>개인 정보</h3>
+							
+							<div class="form-row">
+								<div class="form-group">
+									<label for="user_type">회원구분 <span class="required">*</span></label>
+									<select id="user_type" bind:value={formData.user_type} required>
+										{#each userTypes as type}
+											<option value={type.value}>{type.label}</option>
+										{/each}
+									</select>
+								</div>
+								
+								<div class="form-group">
+									<label for="user_name">이름 <span class="required">*</span></label>
+									<input
+										id="user_name"
+										type="text"
+										bind:value={formData.user_name}
+										placeholder="이름"
+										required
+									/>
+								</div>
+							</div>
 
-                    <div>
-                        <label class="block font-medium text-theme text-xs" for="user_email">
-                            이메일 (<span class="edit-item-required">★</span>)
-                        </label>
-                        <input
-                            id="user_email"
-                            type="email"
-                            bind:value={formData.user_email}
-                            onblur={validateEmail}
-                            placeholder="이메일"
-                            class="mt-1 block w-full px-3 py-2 border border-theme rounded-md shadow-sm 
-                                focus:outline-none focus:ring-primary focus:border-primary 
-                                bg-input text-input-text text-base placeholder:text-base"
-                            required
-                        />
-                        {#if errors.user_email}
-                            <p class="mt-1 text-sm text-red-500">{errors.user_email}</p>
-                        {/if}
-                    </div>
+							<div class="form-group">
+								<label for="user_email">이메일 <span class="required">*</span></label>
+								<input
+									id="user_email"
+									type="email"
+									bind:value={formData.user_email}
+									onblur={validateEmail}
+									placeholder="이메일"
+									required
+								/>
+								{#if errors.user_email}
+									<span class="error-message">{errors.user_email}</span>
+								{/if}
+							</div>
 
-                    <div>
-                        <label class="block font-medium text-theme text-xs" for="user_tel">
-                            휴대폰 번호 (<span class="edit-item-required">★</span>)
-                        </label>
-                        <input
-                            id="user_tel"
-                            type="tel"
-                            bind:value={formData.user_tel}
-                            onblur={validatePhone}
-                            placeholder="휴대폰 번호 (- 없이 입력)"
-                            class="mt-1 block w-full px-3 py-2 border border-theme rounded-md shadow-sm 
-                                focus:outline-none focus:ring-primary focus:border-primary 
-                                bg-input text-input-text text-base placeholder:text-base"
-                            required
-                        />
-                        {#if errors.user_tel}
-                            <p class="mt-1 text-sm text-red-500">{errors.user_tel}</p>
-                        {/if}
-                    </div>
+							<div class="form-group">
+								<label for="user_tel">휴대폰 번호 <span class="required">*</span></label>
+								<input
+									id="user_tel"
+									type="tel"
+									bind:value={formData.user_tel}
+									onblur={validatePhone}
+									placeholder="휴대폰 번호 (- 없이 입력)"
+									required
+								/>
+								{#if errors.user_tel}
+									<span class="error-message">{errors.user_tel}</span>
+								{/if}
+							</div>
 
-                    <div>
-                        <label class="block font-medium text-theme text-xs" for="user_company">
-                            회사명
-                        </label>
-                        <input
-                            id="user_company"
-                            type="text"
-                            bind:value={formData.user_company}
-                            placeholder="회사명 (선택사항)"
-                            class="mt-1 block w-full px-3 py-2 border border-theme rounded-md shadow-sm 
-                                focus:outline-none focus:ring-primary focus:border-primary 
-                                bg-input text-input-text text-base placeholder:text-base"
-                        />
-                    </div>
-                </div>
+							<div class="form-group">
+								<label for="user_company">회사명</label>
+								<input
+									id="user_company"
+									type="text"
+									bind:value={formData.user_company}
+									placeholder="회사명 (선택사항)"
+								/>
+							</div>
+						</div>
 
-                <!-- 약관 동의 -->
-                <div class="space-y-2">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <input
-                                id="terms"
-                                type="checkbox"
-                                bind:checked={agreements.terms}
-                                class="h-4 w-4 text-primary focus:ring-primary border-theme rounded"
-                                required
-                            />
-                            <label class="ml-2 block text-sm text-theme" for="terms">
-                                이용약관 동의 <span class="text-red-500">(필수)</span>
-                            </label>
-                        </div>
-                        <button
-                            type="button"
-                            onclick={() => showTerms('terms')}
-                            class="text-sm text-primary hover:text-primary-hover"
-                        >
-                            보기
-                        </button>
-                    </div>
-            
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <input
-                                id="privacy"
-                                type="checkbox"
-                                bind:checked={agreements.privacy}
-                                class="h-4 w-4 text-primary focus:ring-primary border-theme rounded"
-                                required
-                            />
-                            <label class="ml-2 block text-sm text-theme" for="privacy">
-                                개인정보 처리방침 동의 <span class="text-red-500">(필수)</span>
-                            </label>
-                        </div>
-                        <button
-                            type="button"
-                            onclick={() => showTerms('privacy')}
-                            class="text-sm text-primary hover:text-primary-hover"
-                        >
-                            보기
-                        </button>
-                    </div>
-            
-                    <div class="flex items-center">
-                        <input
-                            id="user_marketing"
-                            type="checkbox"
-                            bind:checked={agreements.marketing}
-                            class="h-4 w-4 text-primary focus:ring-primary border-theme rounded"
-                        />
-                        <label class="ml-2 block text-sm text-theme" for="user_marketing">
-                            마케팅 정보 수신 동의 (선택)
-                        </label>
-                    </div>
-                </div>
+						<!-- 약관 동의 섹션 -->
+						<div class="form-section">
+							<h3>약관 동의</h3>
+							
+							<div class="agreement-item">
+								<div class="agreement-checkbox">
+									<input
+										id="terms"
+										type="checkbox"
+										bind:checked={agreements.terms}
+										required
+									/>
+									<label for="terms">이용약관 동의 <span class="required">(필수)</span></label>
+								</div>
+								<button type="button" onclick={() => showTerms('terms')} class="view-terms">보기</button>
+							</div>
 
-                <button
-                    type="submit"
-                    onclick={handleSubmit}
-                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm 
-                        text-base font-medium text-white bg-primary hover:bg-primary-hover 
-                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                >
-                    가입하기
-                </button>
-            </form>
+							<div class="agreement-item">
+								<div class="agreement-checkbox">
+									<input
+										id="privacy"
+										type="checkbox"
+										bind:checked={agreements.privacy}
+										required
+									/>
+									<label for="privacy">개인정보 처리방침 동의 <span class="required">(필수)</span></label>
+								</div>
+								<button type="button" onclick={() => showTerms('privacy')} class="view-terms">보기</button>
+							</div>
 
-            <div class="mt-6 text-center">
-                <p class="text-sm text-theme">
-                    이미 계정이 있으신가요? 
-                    <a href="/s/signIn" class="font-medium text-primary hover:text-primary-hover">
-                        로그인
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
+							<div class="agreement-item">
+								<div class="agreement-checkbox">
+									<input
+										id="user_marketing"
+										type="checkbox"
+										bind:checked={agreements.marketing}
+									/>
+									<label for="user_marketing">마케팅 정보 수신 동의 (선택)</label>
+								</div>
+							</div>
+						</div>
+
+						<button type="submit" class="signup-button">
+							회원가입
+						</button>
+					</form>
+				</div>
+
+				<!-- 로그인 링크 섹션 -->
+				<div class="login-section">
+					<p>이미 계정이 있으신가요?</p>
+					<a href="/s/signIn" class="login-button">로그인</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
 <TermsModal
-        isOpen={modalState.isOpen}
-        title={modalState.title}
-        content={modalState.content}
-        type={modalState.type}
-        onClose={closeModal}
-    />
+	isOpen={modalState.isOpen}
+	title={modalState.title}
+	content={modalState.content}
+	type={modalState.type}
+	onClose={closeModal}
+/>
 
 <style>
-    :global(.text-theme) {
-        color: var(--text-color);
-    }
+	.signup-page {
+		min-height: 100vh;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+	}
 
-    :global(.bg-theme) {
-        background-color: var(--bg-color);
-    }
+	.signup-section {
+		width: 100%;
+		max-width: 500px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
-    :global(.border-theme) {
-        border-color: var(--border-color);
-    }
+	.container {
+		width: 100%;
+	}
 
-    :global(.shadow-theme) {
-        box-shadow: 0 2px 10px var(--shadow-color);
-    }
+	.signup-card {
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+		overflow: hidden;
+		border: 1px solid #e2e8f0;
+	}
 
-    :global(.bg-input) {
-        background-color: var(--input-bg);
-    }
+	.signup-header {
+		text-align: center;
+		padding: 3rem 2rem 2rem;
+		background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+	}
 
-    :global(.text-input-text) {
-        color: var(--input-text);
-    }
+	.logo-link {
+		display: inline-block;
+	}
 
-    :global(.text-primary) {
-        color: var(--primary-color);
-    }
+	.logo {
+		height: 60px;
+		width: auto;
+	}
 
-    :global(.bg-primary) {
-        background-color: var(--primary-color);
-    }
+	.signup-title {
+		font-size: 2rem;
+		font-weight: 700;
+		color: #2d3748;
+		margin: 1.5rem 0 0.5rem;
+	}
 
-    :global(.hover\:bg-primary-hover:hover) {
-        background-color: var(--primary-hover);
-    }
+	.signup-subtitle {
+		font-size: 1rem;
+		color: #718096;
+		margin: 0;
+	}
 
-    :global(.hover\:text-primary-hover:hover) {
-        color: var(--primary-hover);
-    }
+	.signup-form-wrapper {
+		padding: 2rem;
+	}
 
-    :global(.focus\:ring-primary:focus) {
-        --tw-ring-color: var(--primary-color);
-    }
+	.signup-form {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
 
-    :global(.focus\:border-primary:focus) {
-        border-color: var(--primary-color);
-    }
+	.form-section {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
 
-    .edit-item-required {
-        font-size: 12px;
-    }
+	.form-section h3 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: #2d3748;
+		margin: 0 0 1rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 2px solid #e2e8f0;
+	}
+
+	.form-row {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		gap: 1rem;
+	}
+
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.form-group label {
+		font-weight: 600;
+		color: #4a5568;
+		font-size: 0.875rem;
+	}
+
+	.required {
+		color: #e53e3e;
+	}
+
+	.form-group input,
+	.form-group select {
+		padding: 0.875rem 1rem;
+		border: 2px solid #e2e8f0;
+		border-radius: 10px;
+		font-size: 1rem;
+		transition: all 0.3s ease;
+		background: #f8f9fa;
+	}
+
+	.form-group input:focus,
+	.form-group select:focus {
+		outline: none;
+		border-color: #667eea;
+		background: white;
+		box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+	}
+
+	.error-message {
+		color: #e53e3e;
+		font-size: 0.875rem;
+		margin-top: 0.25rem;
+	}
+
+	.agreement-item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1rem;
+		background: #f8f9ff;
+		border-radius: 10px;
+		border: 1px solid #e2e8f0;
+	}
+
+	.agreement-checkbox {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.agreement-checkbox input[type="checkbox"] {
+		width: 18px;
+		height: 18px;
+		accent-color: #667eea;
+	}
+
+	.agreement-checkbox label {
+		font-size: 0.875rem;
+		color: #4a5568;
+		cursor: pointer;
+		margin: 0;
+	}
+
+	.view-terms {
+		background: none;
+		border: none;
+		color: #667eea;
+		font-size: 0.875rem;
+		font-weight: 600;
+		cursor: pointer;
+		text-decoration: underline;
+		padding: 0.25rem 0.5rem;
+		border-radius: 5px;
+		transition: all 0.3s ease;
+	}
+
+	.view-terms:hover {
+		background: #667eea;
+		color: white;
+		text-decoration: none;
+	}
+
+	.signup-button {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		border: none;
+		padding: 1rem 2rem;
+		border-radius: 10px;
+		font-size: 1.125rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		margin-top: 1rem;
+	}
+
+	.signup-button:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+	}
+
+	.login-section {
+		text-align: center;
+		padding: 1.2rem;
+		background: #f8f9ff;
+		border-top: 1px solid #e2e8f0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.login-section p {
+		color: #718096;
+		margin-bottom: 0;
+		font-size: 0.875rem;
+	}
+
+	.login-button {
+		display: inline-block;
+		background: white;
+		color: #667eea;
+		border: 2px solid #667eea;
+		padding: 0.5rem 2rem;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		font-size: 0.875rem;
+	}
+
+	.login-button:hover {
+		background: #667eea;
+		color: white;
+		transform: translateY(-1px);
+	}
+
+	/* 모바일 반응형 */
+	@media (max-width: 768px) {
+		.signup-page {
+			padding: 0;
+			background: white;
+		}
+
+		.signup-section {
+			width: 100%;
+			max-width: none;
+			min-height: 100vh;
+			align-items: flex-start;
+			padding-top: 80px;
+		}
+
+		.container {
+			width: 100%;
+			padding: 0 !important;
+			max-width: 100% !important;
+			margin: 0 !important;
+		}
+
+		.signup-card {
+			border-radius: 0;
+			box-shadow: none;
+			border: none;
+			min-height: calc(100vh - 80px);
+			display: flex;
+			flex-direction: column;
+		}
+
+		.signup-header {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 2rem 1.5rem 1.5rem;
+			border-radius: 16px 16px 0 0;
+		}
+
+		.signup-header .signup-title {
+			color: white;
+		}
+
+		.signup-header .signup-subtitle {
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+		.signup-form-wrapper {
+			padding: 1.5rem;
+			background: white;
+			flex: 1;
+		}
+
+		.form-row {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.login-section {
+			padding: 1.2rem;
+			background: #f8f9ff;
+			border-radius: 0 0 16px 16px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.signup-header {
+			padding: 1.5rem 1rem 1rem;
+		}
+
+		.signup-form-wrapper {
+			padding: 1rem;
+		}
+
+		.login-section {
+			padding: 1rem;
+			background: #f8f9ff;
+			border-radius: 0 0 16px 16px;
+		}
+
+		.form-section h3 {
+			font-size: 1.125rem;
+		}
+	}
+
+	/* 글로벌 스타일 오버라이드 */
+	:global(.signup-section .container) {
+		padding: 0 !important;
+		max-width: 100% !important;
+		margin: 0 !important;
+	}
+
+	:global(.container) {
+		padding: 0 !important;
+		max-width: 100% !important;
+		margin: 0 !important;
+	}
+
+	:global(html),
+	:global(body) {
+		overflow-x: hidden !important;
+		width: 100% !important;
+		max-width: 100% !important;
+	}
 </style>
