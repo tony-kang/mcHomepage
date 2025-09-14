@@ -1,15 +1,9 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-auto';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
-			fallback: 'index.html',
-			precompress: false,
-			strict: true
-		}),
+		adapter: adapter(),
 		alias: {
 			$src: 'src',
 			$lib: 'src/lib',
@@ -17,15 +11,6 @@ const config = {
 			$data: 'src/data',
 			$common: 'src/common',
 		}
-	},
-
-	compilerOptions: {
-		// Svelte 4 컴포넌트 API와 호환성 유지
-		// 호환이 안되는 콤포넌트
-		//     @svelte-plugins/tooltips
-		// compatibility: {
-		// 	componentApi: 4
-		// }
 	},
 	
 	onwarn: (warning, handler) => {
